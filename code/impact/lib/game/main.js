@@ -3,7 +3,10 @@ ig.module(
 )
 .requires(
 	'impact.game',
-	'impact.font'
+	'impact.font',
+    'game.entities.towers.*',
+    'game.levels.*'
+
 )
 .defines(function(){
 
