@@ -1,9 +1,18 @@
 
+var MathUtil = {
+    rollVariation : function(value, variance) {
+        return value + value * (variance * value * Math.random());
+    },
 
-var SarcasmUtil = {
-    "emit" : function() {
-        console.log("This is just a dumb method to illustrate to Devon how I want to do utils." +
-            " ... uh Not!  Yeah sarcasm or maybe not!");
+    rollAgainstChance : function(chance) {
+        return Math.random() <= chance;
+    }
+}
+
+var CombatUtil = {
+
+    computeDamage : function(attack, defense) {
+
     }
 }
 
