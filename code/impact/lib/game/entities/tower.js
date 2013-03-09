@@ -1,5 +1,5 @@
 ig.module(
-	'game.entities.tower'
+	'game.entities.Tower'
 )
 .requires(
     'impact.entity'

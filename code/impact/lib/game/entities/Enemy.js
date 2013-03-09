@@ -1,5 +1,5 @@
 ig.module(
-    'game.entities.enemy'
+    'game.entities.Enemy'
 )
 .requires(
     'impact.entity'

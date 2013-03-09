@@ -4,7 +4,7 @@ ig.module(
 .requires(
 	'impact.game',
 	'impact.font',
-    'game.entities.tower',
+    'game.entities.Tower',
     'game.levels.test'
 )
 .defines(function(){
