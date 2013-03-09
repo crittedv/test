@@ -4,9 +4,8 @@ ig.module(
 .requires(
 	'impact.game',
 	'impact.font',
-    'game.entities.towers.*',
-    'game.levels.*'
-
+    'game.entities.tower',
+    'game.levels.test'
 )
 .defines(function(){
 
@@ -18,6 +17,8 @@ MyGame = ig.Game.extend({
 	
 	init: function() {
 		// Initialize your game here; bind keys etc.
+
+        this.loadLevel( LevelTest );
 	},
 	
 	update: function() {
@@ -41,8 +42,8 @@ MyGame = ig.Game.extend({
 });
 
 
-// Start the Game with 60fps, a resolution of 320x240, scaled
-// up by a factor of 2
-ig.main( '#canvas', MyGame, 60, 320, 240, 2 );
+// Start the Game with 60fps, a resolution of 640x480, scaled
+// up by a factor of 1
+ig.main( '#canvas', MyGame, 60, 640, 480, 1 );
 
 });
