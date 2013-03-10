@@ -9,7 +9,7 @@ ig.module(
 )
 .defines(function(){
 
-    AttackPrototype = ig.Class.extend({
+    Weapon = ig.Class.extend({
 
         /**
          * A number from 0-1 indicating the chance for a critical strike
