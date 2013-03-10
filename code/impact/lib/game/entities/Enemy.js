@@ -15,6 +15,7 @@ ig.module(
 
         defense: null,
         bounceSign : -1,
+        name: null,
 
         type: ig.Entity.TYPE.B,
         visitedWaypoints : {},
