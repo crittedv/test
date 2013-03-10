@@ -1,5 +1,5 @@
 /**
- * DefensePrototype is an arch-type factory for Defense objects (specific instances of an entity using it's armor/
+ * Armor is an arch-type factory for Defense objects (specific instances of an entity using it's armor/
  * speed to defend against attacks).  Defense rating is used when calculating the damage of an attack.
  *
  */
@@ -22,12 +22,12 @@ ig.module(
         /**
          *
          * @param rating
-         * @param proto
+         * @param armor
          * @param dodgeRating
          */
-        init: function( rating, proto, dodgeRating ) {
+        init: function( rating, armor, dodgeRating ) {
             this.rating = rating;
-            this.proto  = defensePrototype;
+            this.proto  = armor;
 
             if(dodgeRating > 0) {
                 this.isDodge  = true;

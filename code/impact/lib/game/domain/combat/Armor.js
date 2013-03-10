@@ -1,16 +1,16 @@
 /**
- * DefensePrototype is an arch-type factory for Defense objects (specific instances of an entity using it's armor/
+ * Armor is an arch-type factory for Defense objects (specific instances of an entity using it's armor/
  * speed to defend against attacks).  Defense rating is used when calculating the damage of an attack.
  *
  */
 ig.module(
-    'game.domain.combat.DefensePrototype'
+    'game.domain.combat.Armor'
 )
 .requires(
 )
 .defines(function(){
 
-    DefensePrototype = ig.Class.extend({
+    Armor = ig.Class.extend({
 
         /**
          * The chance that an enemy will dodge an attack rather than absorb
@@ -43,8 +43,7 @@ ig.module(
         rating : 0,
 
         /**
-         * Describes the type of armor of this prototype.  This must be a member
-         * of the ARMOR_TYPE enum.  Depending on the attack type of the attack
+         * This must be a member of the ARMOR_TYPE enum.  Depending on the attack type of the attack
          * and damage type of the armor an attack might deal more or less damage than usual.
          * TODO: Do we want damageType?
          */
@@ -63,7 +62,7 @@ ig.module(
         },
 
         /**
-         * Create a Defense object using this object as a prototype.  The
+         * Create a Defense object using this Armor object as a prototype.  The
          * @return Defense object describing this defense.
          */
         rollDefense : function() {

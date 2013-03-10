@@ -16,6 +16,7 @@ ig.module(
         name  : null,
         next  : null,
         timer : null,
+        enitityNum : 0,
 
         update : function() {
             if(this.timer == null) {
@@ -34,6 +35,7 @@ ig.module(
             var center = this.centerPos();
             var settings = {};
             settings.waypoint = this.next;
+            settings.name = settings.name = "enemy_" + this.enitityNum++;
             ig.game.spawnEntity(EntityEnemy, center.x, center.y, settings);
         }
     });

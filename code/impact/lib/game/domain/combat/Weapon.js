@@ -1,9 +1,9 @@
 /**
- * AttackPrototype is the arch-type factory of an attack. That is, an attack may have an attack prototype object
+ * Weapon is the arch-type factory of an attack. That is, a tower may have an weapon object
  * (perhaps multiple?) that is used to generate an instance of an attack on an enemy.
  */
 ig.module(
-    'game.domain.combat.AttackPrototype'
+    'game.domain.combat.Weapon'
 )
 .requires(
 )
@@ -78,7 +78,7 @@ ig.module(
 
 
         /**
-         * Create an Attack object using this object as a prototype.  The
+         * Create an Attack object using this object as a Weapon.  The
          * @return Attack object describing this attack.
          */
         rollAttack : function() {

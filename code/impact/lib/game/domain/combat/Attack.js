@@ -13,14 +13,14 @@ ig.module(
 
         damage   : 0,
 
-        proto : null,
+        weapon : null,
 
         isCrit : false,
         critDamage : 0,
 
-        init: function( damage, prototype, critDamage) {
+        init: function( damage, weapon, critDamage) {
             this.damage   = damage;
-            this.proto    = prototype;
+            this.weapon   = weapon;
             if(critDamage > 0) {
                 this.isCrit     = true;
                 this.critDamage = critDamage;
