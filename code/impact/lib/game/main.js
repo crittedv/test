@@ -5,6 +5,7 @@ ig.module(
 	'impact.game',
 	'impact.font',
     'game.entities.Tower',
+    'game.entities.Enemy',
     'game.levels.test'
 )
 .defines(function(){

@@ -6,6 +6,10 @@ var TypeUtil = {
 
     hasProp : function(value, prop) {
         return this.isDefined(value[prop]);
+    },
+
+    isEmpty : function(value) {
+        return !this.isDefined(value) || value == null;
     }
 }
 

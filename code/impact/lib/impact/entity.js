@@ -198,8 +198,21 @@ ig.Entity = ig.Class.extend({
 			(other.pos.x + other.size.x/2) - (this.pos.x + this.size.x/2)
 		);
 	},
-	
-	
+
+    vectorTo: function( other ) {
+        var xd = (this.pos.x + this.size.x/2) - (other.pos.x + other.size.x/2);
+        var yd = (this.pos.y + this.size.y/2) - (other.pos.y + other.size.y/2);
+        var dist = Math.sqrt( xd*xd + yd*yd ); //same as distance up to here
+        var x = xd / dist;
+        return {x : -xd / dist, y : -yd / dist};
+    },
+
+    centerPos : function() {
+        var xCenter = this.pos.x + this.size.x/2;
+        var yCenter = this.pos.y + this.size.y/2;
+        return {x: xCenter, y: yCenter};
+    },
+
 	check: function( other ) {},
 	collideWith: function( other, axis ) {},
 	ready: function() {}

@@ -15,6 +15,7 @@ ig.module(
         _wmBoxColor: 'rgba(196, 255, 0, 0.7)',
 
         name : null,
+        next : null,
 
         check: function( other ) {
             console.log("WAYPOINT");
