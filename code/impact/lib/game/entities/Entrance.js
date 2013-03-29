@@ -12,7 +12,7 @@ ig.module(
         _wmDrawBox: true,
         _wmBoxColor: 'rgba(150, 22, 190, 0.5)',
 
-        spawnRate : 5, //10 seconds
+        spawnRate : 1, //10 seconds
         name  : null,
         next  : null,
         timer : null,

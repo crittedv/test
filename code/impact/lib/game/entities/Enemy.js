@@ -38,6 +38,16 @@ ig.module(
             return this.health / this.maxHealth;
         },
 
+        isDead : function() {
+           // console.log("creep health: " + this.name);
+            if(this.getHealth() <= 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        },
+
         visitWaypoint : function(waypoint) {
             if(!TypeUtil.hasProp(this.visitedWaypoints, waypoint.name)) {
                 console.log("Enemy visited waypoint: " + waypoint.name);
@@ -91,6 +101,11 @@ ig.module(
                     this.kill();
                 }
             }
+        },
+
+        kill: function() {
+            this.showDeath();
+            this.parent();
         },
 
         showDeath: function() {

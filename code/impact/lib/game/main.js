@@ -6,6 +6,7 @@ ig.module(
 	'impact.font',
     'game.entities.Tower',
     'game.entities.Enemy',
+    'game.entities.Projectile',
     'game.levels.test'
 )
 .defines(function(){
@@ -18,6 +19,8 @@ MyGame = ig.Game.extend({
 	
 	init: function() {
 		// Initialize your game here; bind keys etc.
+        ig.input.bind( ig.KEY.MOUSE1, 'leftButton' );
+        ig.input.bind( ig.KEY.MOUSE2, 'rightButton' );
 
         this.loadLevel( LevelTest );
 	},
