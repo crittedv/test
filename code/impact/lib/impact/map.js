@@ -17,8 +17,8 @@ ig.Map = ig.Class.extend({
 		this.height = data.length;
 		this.width = data[0].length;
 	},
-	
-	
+
+
 	getTile: function( x, y ) {
 		var tx = Math.floor( x / this.tilesize );
 		var ty = Math.floor( y / this.tilesize );

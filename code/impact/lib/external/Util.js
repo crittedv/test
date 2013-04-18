@@ -1,3 +1,19 @@
+/**
+ * Utils that should be succinct and may be used often
+ */
+var Sk = {
+    assert : function(condition, message) {
+        if(TypeUtil.isEmpty(condition) || !condition) {
+            throw message;
+        }
+    }
+}
+
+var StringUtil = {
+    paren : function(str) {
+        return "( " + str + " )";
+    }
+}
 
 var TypeUtil = {
     isDefined : function(value) {
@@ -10,6 +26,18 @@ var TypeUtil = {
 
     isEmpty : function(value) {
         return !this.isDefined(value) || value == null;
+    },
+
+    make2DArray : function(rows, columns, defaultValue) {
+        var arr = Array(rows);
+        for(var i = 0; i < rows.length; i++) {
+            arr[i] = Array(columns);
+            for(var j = 0; j < columns.length; j++) {
+                arr[i][j] = defaultValue;
+            }
+        }
+
+        return arr;
     }
 };
 

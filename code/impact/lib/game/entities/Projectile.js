@@ -9,6 +9,7 @@ ig.module(
         EntityProjectile = ig.Entity.extend({
             name: 'bullet',
             target: null,
+
             speed: 500000000,
             damage: 10,
             radius: 1,
@@ -20,7 +21,8 @@ ig.module(
             upgradeCoefficient: 1,
             isDead: false,
             utils: null,
-            animSheet : new ig.AnimationSheet( 'media/bullet_anim.png', 48, 48 ),
+            size : {x: 8, y: 8},
+            animSheet : new ig.AnimationSheet( 'media/bullet_anim_small.png', 8, 8 ),
             //collision types
             type: ig.Entity.TYPE.NONE,
             checkAgainst: ig.Entity.TYPE.B,
@@ -72,7 +74,9 @@ ig.module(
 
                     //THIS NEEDS TO BE KILLED AFTER  TRAVELING X RANGE?
                    // this.kill();
-                }this.parent();
+                }
+
+                this.parent();
             },
 
             check: function(other){

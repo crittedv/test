@@ -22,6 +22,14 @@ ig.module(
             if(TypeUtil.hasProp(other,"visitWaypoint")) {
                 other.visitWaypoint(this);
             }
+        },
+
+        update : function() {
+            if(TypeUtil.isEmpty(this.path) && !TypeUtil.isEmpty(this.next)) {
+                var nextWaypoint = ig.game.getEntityByName(this.next);
+                this.getPath(nextWaypoint.pos.x, nextWaypoint.pos.y, false, [/*'EntityEnemy'*/]);
+                this.followPath(0);
+            }
         }
     });
 });

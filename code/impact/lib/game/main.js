@@ -6,8 +6,19 @@ ig.module(
 	'impact.font',
     'game.entities.Tower',
     'game.entities.Enemy',
+    'game.entities.Death',
+    'game.entities.Placement',
     'game.entities.Projectile',
-    'game.levels.test'
+    'game.levels.test',
+
+
+    'game.ui.hud.PlacementOverlay',
+
+    'plugins.RichMap',
+    'plugins.RichCollisionMap',
+    'plugins.astar-for-entities-debug',
+
+    'plugins.astar-for-entities'
 )
 .defines(function(){
 
@@ -15,6 +26,7 @@ MyGame = ig.Game.extend({
 	
 	// Load a font
 	font: new ig.Font( 'media/04b03.font.png' ),
+    towerPlacement : new PlacementOverlay("TowerPlacement", {x:48, y:48}),
 	
 	
 	init: function() {
@@ -26,7 +38,10 @@ MyGame = ig.Game.extend({
 	},
 	
 	update: function() {
+
 		// Update all entities and backgroundMaps
+        this.towerPlacement.show();
+        this.towerPlacement.update();
 		this.parent();
 		
 		// Add your own, additional update code here
@@ -35,14 +50,29 @@ MyGame = ig.Game.extend({
 	draw: function() {
 		// Draw all entities and backgroundMaps
 		this.parent();
-		
-		
-		// Add your own drawing code here
-		var x = ig.system.width/2,
-			y = ig.system.height/2;
-		
-		this.font.draw( 'It Works!', x, y, ig.Font.ALIGN.CENTER );
-	}
+        this.drawCursorLoc();
+
+	},
+
+    drawCursorLoc : function() {
+        // Add your own drawing code here
+        var x = ig.system.width - 100,
+            y = ig.system.height - 60;
+
+        var loc = {x : ig.input.mouse.x, y : ig.input.mouse.y};
+        this.font.draw( 'Mouse Loc: ( ' + loc.x + ", " + loc.y + ')',
+             x, y, ig.Font.ALIGN.CENTER );
+        y += 30;
+        var tileIndex = this.collisionMap.getTileIndices(loc);
+        var tileStr = "Collision Index: ("
+        if(tileIndex == 0) {
+          tileStr += "Failure";
+        } else {
+          tileStr += tileIndex.x + ", " + tileIndex.y;
+        }
+        tileStr += " )";
+        this.font.draw( tileStr, x, y, ig.Font.ALIGN.CENTER);
+    }
 });
 
 

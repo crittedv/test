@@ -103,7 +103,8 @@ ig.module(
                             //targetBadGuy.health -= 20;
                             if(targetBadGuy.isDead()){
                                     console.log("SHIT'S DEAD JIM!");
-                                    targetBadGuy.showDeath();
+                                    targetBadGuy.kill(); //TODO: I think this should be left to the entity, but we need
+                                                         //TODO: perhaps add a LISTENER METHOD to enemies
                                     this.resetTarget();
                                 if(bullet != undefined && bullet != null){
                                     bullet.kill();
@@ -217,6 +218,7 @@ ig.module(
             settings.damage = this.damage;
             settings.range = this.range;
             settings.angle = this.angleTo(this.target);
+            settings.size = {x:8, y:8};
 
 
            return ig.game.spawnEntity( EntityProjectile, trajectory.x, trajectory.y, settings );

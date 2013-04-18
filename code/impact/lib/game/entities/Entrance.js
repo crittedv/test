@@ -29,6 +29,12 @@ ig.module(
                     this.timer.set(this.spawnRate);
                 }
             }
+
+            if(TypeUtil.isEmpty(this.path) && !TypeUtil.isEmpty(this.next)) {
+                var nextWaypoint = ig.game.getEntityByName(this.next);
+                this.getPath(nextWaypoint.pos.x, nextWaypoint.pos.y, false, [/*'EntityEnemy'*/]);
+                this.followPath(0);
+            }
         },
 
         spawn : function() {

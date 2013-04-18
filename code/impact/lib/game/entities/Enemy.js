@@ -12,9 +12,8 @@ ig.module(
         coord      : null,
 
         zIndex: 10,
-        size: {x:32, y:32},
+        size: {x:16, y:16},
 
-        dying : false,
         defense: null,
         bounceSign : -1,
         speed: 40,
@@ -22,13 +21,13 @@ ig.module(
         maxHealth : 0,
         health    : 0,
         healthMeterUi : null,
-        deathTimer : null,
+        healthMeterYOffset : -1,
 
         type: ig.Entity.TYPE.B,
         visitedWaypoints : {},
         waypoint         : null,
 
-        animSheet : new ig.AnimationSheet( 'media/tmp/devonHeads.png', 40, 40 ),
+        animSheet : new ig.AnimationSheet( 'media/tmp/devonHeads_medium.png', 16, 16 ),
 
         getHealth : function() {
             return this.health;
@@ -60,15 +59,14 @@ ig.module(
 
         visitExit : function(exit) {
             console.log("Creature escaped");
-            this.showDeath();
+            this.spawnDeath();
         },
 
         setWaypoint : function(waypointName) {
             if(TypeUtil.isDefined(waypointName)) {
                 this.waypoint = ig.game.getEntityByName(waypointName);
-                var vector = this.vectorTo(this.waypoint);
-                this.vel.x = vector.x * this.speed;
-                this.vel.y = vector.y * this.speed;
+                this.getPath(this.waypoint.pos.x, this.waypoint.pos.y, false, [/*'EntityEnemy'*/]);
+                this.followPath(this.speed, true);
             } else {
                 this.vel.x = 0;
                 this.vel.y = 0;
@@ -82,7 +80,7 @@ ig.module(
             this.defense = settings.defense;
             this.addAnim( 'idle', 0.1, [0,1,2,1,0] );
             this.addAnim( 'moving', 0.1, [0,1,2,3,4,5,4,3,2,1]);
-            this.addAnim( 'death', 0.1, [10,11,12,13,13,13]);
+            this.addAnim( 'death', 0.1, [10,11,12,13,13,13], true);
             this.healthMeterUi = new BarMeter( this.getHealthMeterSettings() );
             if(TypeUtil.isDefined(settings.waypoint)) {
                 this.setWaypoint(settings.waypoint);
@@ -90,28 +88,37 @@ ig.module(
         },
 
         update: function() {
+
+            if(this.isDead()) {
+                this.kill();
+            }
+
             this.healthMeterUi.pos.x = this.getHealthMeterX();
             this.healthMeterUi.pos.y = this.getHealthMeterY();
             this.healthMeterUi.setPerc(this.getPercHealth());
             this.parent();
 
-            if(this.deathTimer != null) {
-                if(this.deathTimer.delta() >= 0) {
-                    console.log("KILL");
-                    this.kill();
-                }
+            if(!TypeUtil.isEmpty(this.waypoint)) {
+                this.followPath(this.speed, true);
             }
         },
 
-        kill: function() {
-            this.showDeath();
+        kill : function() {
+            this.spawnDeath();
             this.parent();
         },
 
-        showDeath: function() {
-            this.dying = true;
-            this.deathTimer = new ig.Timer(.02);
-            this.currentAnim = this.anims.death;
+        getDeathSettings : function() {
+            var size = this.size;
+            return {
+                animSheet : this.animSheet,
+                deathAnim : {name : 'death', frameTime : 0.1, sequence : [10,11,12,13,13,13]},
+                size      : size
+            };
+        },
+
+        spawnDeath: function() {
+            ig.game.spawnEntity(EntityDeath, this.pos.x, this.pos.y, this.getDeathSettings());
         },
 
         getHealthMeterSettings : function() {
@@ -130,7 +137,7 @@ ig.module(
         getHealthMeterX     : function() {return this.pos.x },
         getHealthMeterWidth : function() {return this.size.x},
 
-        getHealthMeterY      : function() {return this.pos.y + this.size.y + 5},
+        getHealthMeterY      : function() {return this.pos.y + this.size.y + this.healthMeterYOffset},
         getHealthMeterHeight : function() {return 5},
 
         draw : function() {
