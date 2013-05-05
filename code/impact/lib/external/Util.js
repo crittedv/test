@@ -57,6 +57,13 @@ var CombatUtil = {
 
     },
 
+    /**
+     * Util to determine which entities are within range of a given tower.
+     *
+     * @param type      The type being detected
+     * @param tower     The tower entity
+     * @returns {Array} The array of entities within range of the tower
+     */
     getEntitiesInRange: function(type,tower) {
 
         var arrTestEntities = [];

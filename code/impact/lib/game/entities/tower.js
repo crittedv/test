@@ -66,6 +66,13 @@ ig.module(
             }
         },
 
+        /**
+         * This update function:
+         *    - Checks to see if the user has selected the tower
+         *    - Targets & fires at bad guys
+         *    - Rotates the tower to follow it's target
+         *    - Searches for & resets the tower's targets
+         */
         update: function(){
             this.parent();
 
@@ -128,12 +135,17 @@ ig.module(
             }
         },
 
+        /**
+         * Determines which creep to lock on to
+         */
         searchForTarget: function() {
 
+          /*
             var closest_creep;
             var closest_distance;
-            var creeps= new Array();
+            var creeps= [];   */
             //console.log("This.name2: " + this.name);
+
             creeps = CombatUtil.getEntitiesInRange(EntityEnemy,this);
 
             if(creeps.length  > 0 ){
@@ -153,11 +165,11 @@ ig.module(
                         this.lockedOn = true;
                         break;
 
-
+                        /*
+                        May use depending on chosen AI going forward
                         if(!closest_creep){
                             closest_creep=creep;
                             closest_distance=distance;
-
                         }
                         else{
                             if(distance<closest_distance){
@@ -165,6 +177,7 @@ ig.module(
                                 closest_distance=distance;
                             }
                         }
+                        */
                     }
                     else{
                         break;
@@ -177,6 +190,10 @@ ig.module(
 
         },
 
+        /**
+         * Determines if the detected mouse click was on this tower.
+         * @returns boolean - whether or not the user selected the tower.
+         */
         inFocus: function() {
             return (
                 (this.pos.x <= (ig.input.mouse.x + ig.game.screen.x)) &&
@@ -186,26 +203,22 @@ ig.module(
                 );
         },
 
-        canBuildAt:function(gx,gy){
-            if(gx>=0&&gx<ig.game.columns&&gy>=0&&gy<ig.game.rows){
-                if(!this.utils.getTerrainAt(gx,gy).hasHuman&&(this.utils.getTerrainAt(gx,gy).buildable)){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-            return false;
-        },
-
+        /**
+         * This should determine the angle & position of the bullet to be spawned.
+         * @returns {{x: *, y: *, sin: *, cos: *}}
+         */
         calculateAngle: function() {
             sinAngle = Math.sin(this.anims.idle.angle);
             cosAngle = Math.cos(this.anims.idle.angle);
             bulletX = (this.pos.x + this.size.x/2) + (-1 * sinAngle);
-            bulletY = (this.pos.y + this.size.y/2) - (1 * cosAngle);
+            bulletY = (this.pos.y + this.size.y/2) - (cosAngle);
             return {x: bulletX, y: bulletY, sin: sinAngle, cos: cosAngle};
         },
 
+        /**
+         * Function to create the projectile being hurled towards the evil doers.
+         * @returns EntityProjectile - the object of destruction.
+         */
         spawn : function() {
 
             trajectory = this.calculateAngle();
@@ -225,9 +238,6 @@ ig.module(
           /*
 
             this all works but doesn't rotate with the tower.
-
-
-
             var forward = 20;
 
             var sx = this.centerPos().x - (Math.cos(this.angle.toRad()) * forward);
@@ -332,6 +342,9 @@ ig.module(
             }
         },*/
 
+        /**
+         *  Resets the tower's target.
+         */
         resetTarget: function() {
            // console.log("Name:" + this.name);
             this.lockedOn = false;

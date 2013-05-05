@@ -10,7 +10,7 @@ ig.module(
             name: 'bullet',
             target: null,
 
-            speed: 500000000,
+            speed: 200,
             damage: 10,
             radius: 1,
             range: 100,
@@ -26,7 +26,9 @@ ig.module(
             //collision types
             type: ig.Entity.TYPE.NONE,
             checkAgainst: ig.Entity.TYPE.B,
-            collides: ig.Entity.COLLIDES.PASSIVE,
+            collides: ig.Entity.COLLIDES.NEVER,
+            fuel: 2,
+            currentFuel: null,
 
             init: function (x, y, settings) {
 
@@ -45,41 +47,50 @@ ig.module(
                 this.maxVel.x = 200;
                 this.maxVel.y = 200;
 
-                this.vel.x = (Math.cos(this.angle.toRad()-Math.PI/2) * this.speed);
-                this.vel.y = (Math.sin(this.angle.toRad()-Math.PI/2) * this.speed);
 
-                this.addAnim( 'moving', 0.1, [0,1]);
+
+             //   this.vel.x = (Math.cos(this.angle.toRad()-Math.PI/2) * this.speed);
+             //   this.vel.y = (Math.sin(this.angle.toRad()-Math.PI/2) * this.speed);
+                this.vel.x = (Math.cos(this.angle.toRad()-Math.PI/2) * this.maxVel.x);
+                this.vel.y = (Math.sin(this.angle.toRad()-Math.PI/2) * this.maxVel.y);
+                this.addAnim( 'moving', 0.4, [0,1]);
                 this.currentAnim = this.anims.moving;
 
-             //   this.vel.x = (Math.cos(this.angle.toRad()-Math.PI/2) * this.maxVel.x);
-              //  this.vel.y = (Math.sin(this.angle.toRad()-Math.PI/2) * this.maxVel.y);
 
                 //this.addAnim( 'moving', 0.2, [0,1] );
                 //rotate the actual angle of the animation sprite
-                this.currentAnim.angle = this.angle.toRad();
+                this.currentAnim.angle = this.angleTo(this.target);
+                this.currentFuel =  new ig.Timer(this.fuel);
+            },
 
+            /**
+             * This overrides the default handleMovementTrace() to ignore collisions with walls
+             * @param res
+             */
+            handleMovementTrace: function(res) {
+                this.pos.x += this.vel.x * ig.system.tick;
+                this.pos.y += this.vel.y * ig.system.tick;
             },
 
             update: function () {
-
-                this.currentAnim.angle = this.angleTo( this.target );
-                var vector = this.tower.vectorTo(this.target);
+                var vector = this.vectorTo(this.target);
                 this.vel.x = vector.x * this.speed;
                 this.vel.y = vector.y * this.speed;
-
                // console.log("distance to " + this.target + ": " + this.distanceTo(this.target));
 
-                if(this.target.isDead()){
+                if(this.target.isDead() || (this.currentFuel.delta() >= this.fuel)){
 
 
                     //THIS NEEDS TO BE KILLED AFTER  TRAVELING X RANGE?
-                   // this.kill();
+                    this.kill();
                 }
+
 
                 this.parent();
             },
 
             check: function(other){
+                console.log("WTF: " + other.name);
                 this.parent();
                // console.log("RANGE CHECK: within 10?");
                 if(other instanceof EntityEnemy){
@@ -88,7 +99,7 @@ ig.module(
 
                     if(other === this.target){
                         other.receiveDamage(this.damage,this);
-                        //this.kill();
+                        this.kill();
                     }
                     //console.log("Testing");
 
