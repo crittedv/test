@@ -33,15 +33,12 @@ defines(function() {
             var numRows = this._calculateTiles(this.height, topLeftIndices.y,  dimension.y);
 
             var tiles = [[]];
-            /*for(var i = 0; i < numCols.actualTiles; i++) {
+            for(var i = 0; i < numCols.actualTiles; i++) {
                 tiles[i] = Array(numRows.actualTiles);
                 for(var j = 0; j < numRows.actualTiles; j++) {
-                    if(!TypeUtil.isDefined(this.data[topLeftIndices.x + i]) ) {
-                        throw ("TOPLEFT " + topLeftIndices.x + " + " + i);
-                    }
-                    tiles[i][j] = this.data[topLeftIndices.x + i][topLeftIndices.y + j];
+                    tiles[i][j] = this.data[topLeftIndices.y + i][topLeftIndices.x + j];
                 }
-            }*/
+            }
 
             var tilesize = this.tilesize;
 

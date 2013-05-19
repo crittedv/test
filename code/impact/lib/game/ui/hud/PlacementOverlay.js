@@ -19,7 +19,7 @@ ig.module(
 
         show : function() {
             if(this.placement == null) {
-                var loc = {x : ig.input.mouse.x, y : ig.input.mouse.y};
+                var loc = this.getLocFromMouse();
                 var collisionInfo = ig.game.collisionMap.getCollisionInfo( loc, this.dimensions );
                 var tl = collisionInfo.topLeft;
 
@@ -30,8 +30,6 @@ ig.module(
                 });
             }
             this.placement.visible = true;
-
-
         },
 
         hide : function() {
@@ -40,10 +38,24 @@ ig.module(
             }
         },
 
+        getLocFromMouse : function() {
+            var collisionMap = ig.game.collisionMap;
+
+            //TODO: Figure out why the -8 (i.e. 1/2 the CollisionMap grid size) get's
+            //TODO: A better result here
+            var x = ig.input.mouse.x - Math.min(this.dimensions.x / 2 - 8);
+            var y = ig.input.mouse.y - Math.min(this.dimensions.y / 2 - 8);
+
+            x = MathUtil.bound(x, 0, collisionMap.widthInPixels());
+            y = MathUtil.bound(y, 0, collisionMap.heightInPixels() - this.dimensions.y);
+
+            return {  x : x, y :y  };
+        },
+
         updatePlacement : function() {
-            var loc = {x : ig.input.mouse.x, y : ig.input.mouse.y};
+            var loc = this.getLocFromMouse();
             var collisionInfo = ig.game.collisionMap.getCollisionInfo( loc, this.dimensions );
-            this.placement.pos = loc;
+            this.placement.pos = collisionInfo.topLeft;
             this.placement.collisionInfo = collisionInfo;
         },
 

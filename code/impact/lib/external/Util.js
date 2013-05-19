@@ -48,6 +48,25 @@ var MathUtil = {
 
     rollAgainstChance : function(chance) {
         return Math.random() <= chance;
+    },
+
+    /**
+     * Return a value that is in between max and min.  If the value
+     * is outside of max and min, return max or min depending on if the
+     * value is less or greater than min/max
+     * @param value The value to limit
+     * @param min The minimum value that can be returned
+     * @param max The maximum value that can be returned
+     */
+    bound : function(value, min, max) {
+        var bound = value;
+        if(value < min) {
+            bound = min;
+        } else if(value > max) {
+            bound = max;
+        }
+
+        return bound;
     }
 };
 
