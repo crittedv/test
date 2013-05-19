@@ -49,7 +49,6 @@ ig.module(
 
         visitWaypoint : function(waypoint) {
             if(!TypeUtil.hasProp(this.visitedWaypoints, waypoint.name)) {
-                console.log("Enemy visited waypoint: " + waypoint.name);
                 this.setWaypoint(waypoint.next);
                 this.bounceSign *= -1;
                 this.currentAnim = this.anims.moving;
@@ -58,8 +57,7 @@ ig.module(
         },
 
         visitExit : function(exit) {
-            console.log("Creature escaped");
-            this.spawnDeath();
+            this.kill();
         },
 
         setWaypoint : function(waypointName) {
@@ -104,8 +102,8 @@ ig.module(
         },
 
         kill : function() {
-            this.spawnDeath();
             this.parent();
+            this.spawnDeath();
         },
 
         getDeathSettings : function() {
