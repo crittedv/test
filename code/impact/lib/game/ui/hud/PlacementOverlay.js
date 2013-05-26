@@ -43,10 +43,10 @@ ig.module(
 
             //TODO: Figure out why the -8 (i.e. 1/2 the CollisionMap grid size) get's
             //TODO: A better result here
-            var x = ig.input.mouse.x - Math.min(this.dimensions.x / 2 - 8);
-            var y = ig.input.mouse.y - Math.min(this.dimensions.y / 2 - 8);
+            var x = ig.input.mouse.x - Math.min(this.dimensions.x / 2 - 32);
+            var y = ig.input.mouse.y - Math.min(this.dimensions.y / 2 - 32);
 
-            x = MathUtil.bound(x, 0, collisionMap.widthInPixels());
+            x = MathUtil.bound(x, 0, collisionMap.widthInPixels()- this.dimensions.x);
             y = MathUtil.bound(y, 0, collisionMap.heightInPixels() - this.dimensions.y);
 
             return {  x : x, y :y  };

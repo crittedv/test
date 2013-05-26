@@ -12,11 +12,11 @@ ig.module(
         coord      : null,
 
         zIndex: 10,
-        size: {x:16, y:16},
+        size: {x:64, y:64},
 
         defense: null,
         bounceSign : -1,
-        speed: 40,
+        speed: 100,
         name: null,
         maxHealth : 0,
         health    : 0,
@@ -27,7 +27,7 @@ ig.module(
         visitedWaypoints : {},
         waypoint         : null,
 
-        animSheet : new ig.AnimationSheet( 'media/tmp/devonHeads_medium.png', 16, 16 ),
+        animSheet : new ig.AnimationSheet( 'media/tmp/devonHeads.png', 64, 64 ),
 
         getHealth : function() {
             return this.health;
@@ -48,6 +48,7 @@ ig.module(
         },
 
         visitWaypoint : function(waypoint) {
+            console.log("VISITING" + waypoint.name);
             if(!TypeUtil.hasProp(this.visitedWaypoints, waypoint.name)) {
                 this.setWaypoint(waypoint.next);
                 this.bounceSign *= -1;

@@ -7,7 +7,7 @@ ig.module(
 .defines(function(){
     EntityTower = ig.Entity.extend({
         zIndex: 10,
-        size: {x: 24, y:24},
+        size: {x: 64, y:64},
         name: null,
 
         collides: ig.Entity.COLLIDES.FIXED,
@@ -25,7 +25,7 @@ ig.module(
         // current target
         target: null,
         // test range
-        range: 100,
+        range: 200,
         angle: 0,
         rateOfFire:.2,
         fireTimer: null,
@@ -34,8 +34,7 @@ ig.module(
         // flag for if the user has this tower selected
         isSelected: false,
 
-
-        animSheet: new ig.AnimationSheet('media/tower.png', 24,24),
+        animSheet: new ig.AnimationSheet('media/tower64x64.png', 64,64),
         init:function( x, y, settings ) {
             this.addAnim('idle', 1, [0]);
             this.pos.x = x;

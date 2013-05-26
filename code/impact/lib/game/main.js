@@ -26,7 +26,7 @@ MyGame = ig.Game.extend({
 	
 	// Load a font
 	font: new ig.Font( 'media/04b03.font.png' ),
-    towerPlacement : new PlacementOverlay("TowerPlacement", {x:48, y:48}),
+    towerPlacement : new PlacementOverlay("TowerPlacement", {x:64, y:64}),
 	
 	
 	init: function() {
@@ -78,6 +78,6 @@ MyGame = ig.Game.extend({
 
 // Start the Game with 60fps, a resolution of 640x480, scaled
 // up by a factor of 1
-ig.main( '#canvas', MyGame, 60, 640, 480, 1 );
+ig.main( '#canvas', MyGame, 60, 1280, 720, 1 );
 
 });
