@@ -101,6 +101,43 @@ var CombatUtil = {
             }
         }
         return arrEntitiesInRange;
+    },
+
+    /**
+     * Util to determine which entities of a given type are closest to the object.
+     *
+     * @param type      The type being detected
+     * @param tower     The affected entity
+     * @returns {Entity} The closest entity to the object
+     */
+    getClosestEntity: function(type,myObject) {
+
+        var arrTestEntities = [];
+        var closestEntity = null;
+
+        arrTestEntities = ig.game.getEntitiesByType(type);
+        console.log("total: " + arrTestEntities.length);
+        if(arrTestEntities.length != 0){
+            for(var i=0;i<arrTestEntities.length;i++){
+                var testObject = arrTestEntities[i];
+                console.log("testing: " + i);
+                if(testObject != undefined && testObject != null){
+                    if(closestEntity != null){
+                       if(myObject.distanceTo(testObject) <= myObject.distanceTo(closestEntity)){
+                            closestEntity = testObject;
+                        }
+                    }
+                    else{
+                        closestEntity = testObject;
+                    }
+                }
+            }
+        }
+        return closestEntity;
     }
+
+
+
+
 };
 

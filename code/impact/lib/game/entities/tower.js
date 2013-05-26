@@ -7,7 +7,7 @@ ig.module(
 .defines(function(){
     EntityTower = ig.Entity.extend({
         zIndex: 10,
-        size: {x: 48, y:48},
+        size: {x: 24, y:24},
         name: null,
 
         collides: ig.Entity.COLLIDES.FIXED,
@@ -35,7 +35,7 @@ ig.module(
         isSelected: false,
 
 
-        animSheet: new ig.AnimationSheet('media/tower.png', 48,48),
+        animSheet: new ig.AnimationSheet('media/tower.png', 24,24),
         init:function( x, y, settings ) {
             this.addAnim('idle', 1, [0]);
             this.pos.x = x;
@@ -48,10 +48,7 @@ ig.module(
         draw: function(){
             this.parent();
             if(this.isSelected){
-           /*     console.log("drawing....................");
-                console.log("range: " + this.range);
-                console.log("X:" + this.pos.x + " Y:" + this.pos.y);
-                console.log("cX:" + this.centerPos().x + " cY:" + this.centerPos().y);*/
+
                 var ctx = ig.system.context;
                 ctx.strokeStyle = "red";  //some color
                 ctx.beginPath();
@@ -101,7 +98,7 @@ ig.module(
                             //console.log("   FIRE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+ this.damage);
                           //  console.log("tower x,y: " + this.pos.x + "," + this.pos.y);
                             bullet = this.spawn();
-                            console.log("bullet x,y: " + bullet.pos.x + "," + bullet.pos.y);
+                     //       console.log("bullet x,y: " + bullet.pos.x + "," + bullet.pos.y);
                             this.fireTimer.reset();
 
                             //roll attack
@@ -109,7 +106,7 @@ ig.module(
                             //projectile
                             //targetBadGuy.health -= 20;
                             if(targetBadGuy.isDead()){
-                                    console.log("SHIT'S DEAD JIM!");
+                                  //  console.log("SHIT'S DEAD JIM!");
                                     targetBadGuy.kill(); //TODO: I think this should be left to the entity, but we need
                                                          //TODO: perhaps add a LISTENER METHOD to enemies
                                     this.resetTarget();
@@ -150,14 +147,14 @@ ig.module(
 
             if(creeps.length  > 0 ){
                 for(var i=0;i<creeps.length;i++){
-                    console.log("                                                 TESTING CREEP: " + i);
+                    //console.log("                                                 TESTING CREEP: " + i);
                     if(!(creeps[i]===undefined)&&!(creeps[i]===null)){
 
                         creep=creeps[i];
-                        console.log("                                                      name: " + creep.name);
+                       // console.log("                                                      name: " + creep.name);
 
                         if(creep.isDead()){
-                            console.log("CREEP IS DEAD");
+                          //  console.log("CREEP IS DEAD");
                             continue;
                         }
 
@@ -204,7 +201,7 @@ ig.module(
         },
 
         /**
-         * This should determine the angle & position of the bullet to be spawned.
+         * This should determine the angle & position of the bullet to be WTFed.
          * @returns {{x: *, y: *, sin: *, cos: *}}
          */
         calculateAngle: function() {
@@ -235,32 +232,6 @@ ig.module(
 
 
            return ig.game.spawnEntity( EntityProjectile, trajectory.x, trajectory.y, settings );
-          /*
-
-            this all works but doesn't rotate with the tower.
-            var forward = 20;
-
-            var sx = this.centerPos().x - (Math.cos(this.angle.toRad()) * forward);
-            var sy = this.centerPos().y - (Math.sin(this.angle.toRad()) * forward);
-
-            var mx = (this.target.pos.x + ig.game.screen.x); //Figures out the x coord of the mouse in the entire world
-            var my = (this.target.pos.y + ig.game.screen.y); //Figures out the y coord of the mouse in the entire world
-
-           // var r = Math.atan2(my-this.pos.y, mx-this.pos.x); //Gives angle in radians from player's location to the mouse location, assuming directly right is 0
-
-            var r = Math.atan2(sy-this.pos.y, sx-this.pos.x);
-            console.log('sx,sy: ' + sx + ',' + sy);
-            console.log('mx,my: ' + mx + ',' + my);
-           //var center = this.centerPos();
-            var settings = {};
-            settings.target = this.target;
-            settings.angle = r;
-            settings.flip = this.flip;
-            settings.tower = this;
-            settings.damage = this.damage;
-            settings.range = this.range;
-            return ig.game.spawnEntity(EntityProjectile, sx, sy, settings);
-           // return ig.game.spawnEntity(EntityProjectile, mx, my, settings);*/
         },
 
    /*     inCircle: function(radius) {
