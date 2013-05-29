@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../../weltmeister/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="BinaryHeap.js"></script>
+    <script type="text/javascript" src="AStar.js"></script>
+    <style>
+        table {
+            min-width: 400px;
+            min-height: 400px;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 0px;
+            margin: 0px;
+            height: 15px;
+            width:  15px;
+            border: 1px solid #676767;
+        }
+
+        td.impassable {
+            background: #1b1b1b;
+        }
+
+        td.passable {
+            background: #a5b7d3;
+        }
+
+        td.path {
+            background: green;
+        }
+
+        td.start {
+            background: #cfce0e;
+        }
+
+        td.finish {
+            background: #4B0082;
+        }
+
+        td.noPath {
+            background: red;
+        }
+
+        td.current {
+            background: orange;
+        }
+
+        td.cameFrom0 { background-image: url("../../../media/astar/astar_0.png"); }
+        td.cameFrom1 { background-image: url("../../../media/astar/astar_1.png"); }
+        td.cameFrom2 { background-image: url("../../../media/astar/astar_2.png"); }
+        td.cameFrom3 { background-image: url("../../../media/astar/astar_3.png"); }
+        td.cameFrom4 { background-image: url("../../../media/astar/astar_4.png"); }
+        td.cameFrom5 { background-image: url("../../../media/astar/astar_5.png"); }
+        td.cameFrom6 { background-image: url("../../../media/astar/astar_6.png"); }
+        td.cameFrom7 { background-image: url("../../../media/astar/astar_7.png"); }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var grid = makeGrid();
+            computeClearance(grid);
+            displayData("data", grid);
+            var start = chooseOpenNode(grid);
+            var end   = chooseOpenNode(grid);
+
+            var $startTd = $("#" + start.x + "_" + start.y);
+            $startTd.removeClass("passable");
+            $startTd.addClass("start");
+
+            var $endTd = $("#" + end.x + "_" + end.y);
+            $endTd.removeClass("passable");
+            $endTd.addClass("finish");
+
+            if(start.x == end.x && start.y == end.y) {
+                alert("Start and end are the same!");
+            }
+
+            var path = findPath(start, end, 2, grid);
+
+        });
+    </script>
+</head>
+<body>
+
+    <table id="data"></table>
+
+</body>
+</html>
