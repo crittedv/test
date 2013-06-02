@@ -463,5 +463,5 @@ function findPath(start, end, requiredClearance, grid) {
         prevCurrent = current;
     }
 
-    doUntil(iterate, function(){ return openSet.size == 0 || path !=  null; }, 50, function(){drawPath(start, path);});
+    doUntil(iterate, function(){ return openSet.size() == 0 || path !=  null; }, 50, function(){drawPath(start, path);});
 }

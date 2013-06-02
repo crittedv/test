@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Annotated AStar</title>
+    <link type="text/css" rel="stylesheet" href="aastar.css" />
+    <script src="../../weltmeister/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="BinaryHeap.js"></script>
+    <script type="text/javascript" src="aastar.js"></script>
+    <script type="text/javascript" src="AAStarDisplay.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var grid = new Grid(new TerrainFlag(Terrain.Land, Terrain.Water), 40, 40, Terrain.Land, [
+                new TerrainConstraints(Terrain.Water,.10, null, null, null, null),
+                new TerrainConstraints(Terrain.Rock, .15, null, null, null, null)
+            ]);
+
+            var start = grid.chooseOf(Terrain.Land);
+            var end = grid.chooseOf(Terrain.Land);
+            while(start == end) {
+                end = grid.chooseAny();
+            }
+
+            var clearance = 2;
+            var startTime = new Date().getTime();
+            grid.computeClearance();
+            var path = grid.findPath(start, end, clearance);
+            var endTime = new Date().getTime();
+
+            displayData("data", grid);
+
+            var $startTd = $("#" + start.x + "_" + start.y);
+            $startTd.removeClass("Land");
+            $startTd.removeClass("Water");
+            $startTd.removeClass("Rock");
+            $startTd.addClass("start");
+
+            var $endTd = $("#" + end.x + "_" + end.y);
+            $endTd.removeClass("Land");
+            $endTd.removeClass("Water");
+            $endTd.removeClass("Rock");
+            $endTd.addClass("finish");
+
+            updateDisplay(grid);
+            drawPath(start, path, grid, clearance);
+            $("body").prepend("<h2>" + (endTime - startTime) + " ms </h2>");
+        });
+    </script>
+</head>
+<body>
+
+<table id="data"></table>
+
+</body>
+</html>
