@@ -19,6 +19,7 @@ ig.module(
             if(TypeUtil.hasProp(other,"visitExit")) {
                 other.visitExit(this);
             }
+            EntityPlayer = ig.game.getEntityByType(EntityPlayer);
         }
     });
 });

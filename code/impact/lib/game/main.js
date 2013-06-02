@@ -9,6 +9,7 @@ ig.module(
     'game.entities.Death',
     'game.entities.Placement',
     'game.entities.Projectile',
+    'game.entities.Player',
     'game.levels.test',
 
 

@@ -78,7 +78,7 @@ ig.module(
                 this.vel.y = vector.y * this.speed;
                // console.log("distance to " + this.target + ": " + this.distanceTo(this.target));
 
-                if(this.target.isDead() || (this.currentFuel.delta() >= this.fuel)){
+                if(this.target.isDead() || this.target == undefined || this.target == null || (this.currentFuel.delta() >= this.fuel)){
 
 
                     //THIS NEEDS TO BE KILLED AFTER  TRAVELING X RANGE?

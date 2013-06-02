@@ -120,7 +120,7 @@ var CombatUtil = {
         if(arrTestEntities.length != 0){
             for(var i=0;i<arrTestEntities.length;i++){
                 var testObject = arrTestEntities[i];
-                console.log("testing: " + i);
+                //console.log("testing: " + i);
                 if(testObject != undefined && testObject != null){
                     if(closestEntity != null){
                        if(myObject.distanceTo(testObject) <= myObject.distanceTo(closestEntity)){
