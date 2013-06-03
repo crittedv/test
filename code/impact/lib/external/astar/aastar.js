@@ -157,9 +157,9 @@ Grid.prototype = {
             if(neighbor.y == node.y - 1) { //Moving to the upper left
                required = neighbor;
             } else if( neighbor.y == node.y+1 ) { //Moving to the bottom left
-               required = this.data[node.y][node.y-1];
+               required = this.data[node.y][node.x-1];
             }
-        } else if(neighbor.y == node.x + 1 ) {
+        } else if(neighbor.x == node.x + 1 ) {
             if(neighbor.y == node.y - 1) { //Moving to the upper right
                 required = this.data[node.y-1][node.x];
             } else if( neighbor.y == node.y+1 ) { //moving to the lower right
@@ -167,7 +167,7 @@ Grid.prototype = {
             }
         }
 
-        return required == null || required.clearance >= requiredClearance + 1;
+        return required == null || required.clearance >= (requiredClearance + 1);
     },
 
     //TODO: Need to handle arbitrary diagonals
