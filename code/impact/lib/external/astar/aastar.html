@@ -9,47 +9,36 @@
     <script type="text/javascript" src="AAStarDisplay.js"></script>
 
     <script type="text/javascript">
+        var display = null;
         $(document).ready(function () {
-            var grid = new Grid(new TerrainFlag(Terrain.Land, Terrain.Water), 40, 40, Terrain.Land, [
-                new TerrainConstraints(Terrain.Water,.10, null, null, null, null),
-                new TerrainConstraints(Terrain.Rock, .15, null, null, null, null)
-            ]);
-
-            var start = grid.chooseOf(Terrain.Land);
-            var end = grid.chooseOf(Terrain.Land);
-            while(start == end) {
-                end = grid.chooseAny();
-            }
-
-            var clearance = 2;
-            var startTime = new Date().getTime();
-            grid.computeClearance();
-            var path = grid.findPath(start, end, clearance);
-            var endTime = new Date().getTime();
-
-            displayData("data", grid);
-
-            var $startTd = $("#" + start.x + "_" + start.y);
-            $startTd.removeClass("Land");
-            $startTd.removeClass("Water");
-            $startTd.removeClass("Rock");
-            $startTd.addClass("start");
-
-            var $endTd = $("#" + end.x + "_" + end.y);
-            $endTd.removeClass("Land");
-            $endTd.removeClass("Water");
-            $endTd.removeClass("Rock");
-            $endTd.addClass("finish");
-
-            updateDisplay(grid);
-            drawPath(start, path, grid, clearance);
-            $("body").prepend("<h2>" + (endTime - startTime) + " ms </h2>");
+            display = new AAStarDisplay({gridTable : "data",
+                                             pathTable : "paths",
+                                             clearance : "clearance",
+                                             lastPath  : "lastPath",
+                                             avgTime   : "avgTime"
+                                            });
+            display.registerKeyListener();
+            display.makeGrid();
+            display.displayData("display");
         });
     </script>
 </head>
 <body>
 
+<!-- Switch to Bootstrap layout -->
+<table id="stats">
+    <tr><td>Clearance MS</td><td id="clearance">x</td> <td><a onclick="display.runPathFinder(2); return false;">Run Path Finder</a></td><td><a onclick="display.computeClearance(true); return false;">Compute Clearance</a></td></tr>
+    <tr><td>Last path</td><td id="lastPath">x</td></tr>
+    <tr><td>Average time this table: </td><td id="avgTime"></td></tr>
+</table>
+
+<div id="controls">
+
+</div>
+
 <table id="data"></table>
+
+<table id="paths"></table>
 
 </body>
 </html>

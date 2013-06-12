@@ -1,10 +1,10 @@
-table {
+table#data {
     min-width: 400px;
     min-height: 400px;
     border-collapse: collapse;
 }
 
-td {
+table#data td {
     padding: 0px;
     margin: 0px;
     height: 15px;
@@ -12,43 +12,57 @@ td {
     border: 1px solid #676767;
 }
 
-td.Land {
+
+
+table#data td.Land {
     background: #e3c89f;
 }
 
-td.Water {
+table#data td.Water {
     background: #457eff;
 }
 
-td.Rock {
+table#data td.Rock {
     background: #000000;
 }
-
-td.path {
-    border: 4px solid green;
-}
-
-td.start {
+table#data td.start {
     background: #00ff0e;
 }
 
-td.finish {
+table#data td.end {
     background: #4B0082;
 }
 
-td.noPath {
+table#data td.noPath {
     background: red;
 }
 
-td.current {
+table#data td.current {
     background: orange;
 }
 
-td.cameFrom0 { background-image: url("../../../media/astar/astar_0.png"); }
-td.cameFrom1 { background-image: url("../../../media/astar/astar_1.png"); }
-td.cameFrom2 { background-image: url("../../../media/astar/astar_2.png"); }
-td.cameFrom3 { background-image: url("../../../media/astar/astar_3.png"); }
-td.cameFrom4 { background-image: url("../../../media/astar/astar_4.png"); }
-td.cameFrom5 { background-image: url("../../../media/astar/astar_5.png"); }
-td.cameFrom6 { background-image: url("../../../media/astar/astar_6.png"); }
-td.cameFrom7 { background-image: url("../../../media/astar/astar_7.png"); }
+table#data td.flippedToRock {
+    background: #746766;
+}
+
+table#data td.flippedToLand {
+    background: #ac884f;
+}
+
+table#data td.path {
+    border: 4px solid green;
+}
+
+
+table#data td.cameFrom0 { background-image: url("../../../media/astar/astar_0.png"); }
+table#data td.cameFrom1 { background-image: url("../../../media/astar/astar_1.png"); }
+table#data td.cameFrom2 { background-image: url("../../../media/astar/astar_2.png"); }
+table#data td.cameFrom3 { background-image: url("../../../media/astar/astar_3.png"); }
+table#data td.cameFrom4 { background-image: url("../../../media/astar/astar_4.png"); }
+table#data td.cameFrom5 { background-image: url("../../../media/astar/astar_5.png"); }
+table#data td.cameFrom6 { background-image: url("../../../media/astar/astar_6.png"); }
+table#data td.cameFrom7 { background-image: url("../../../media/astar/astar_7.png"); }
+
+table#stats {
+    margin-right: 10px;
+}
