@@ -7,16 +7,28 @@
  */
 
 ig.module(
-        'your.path.here'
-    )
-    .requires(
-    )
-    .defines(function () {
+    'game.pathing.TerrainFlag'
+)
+.requires(
+)
+.defines(function () {
 
-        MyClass = ig.Class.extend({
+   //TODO: Add comments and add methods "addTerrain", "removeTerrain"
+   TerrainFlag = ig.Class.extend({
+       flag : 0,
 
-            init: function () {
+        init: function () {
+            if(arguments.length > 0) {
+                this.flag = arguments[0];
+                for(var i = 1; i < arguments.length; i++) {
+                    this.flag |= arguments[i];
+                }
             }
-        });
+        },
 
+        hasTerrain : function(terrain) {
+            return (this.flag & terrain) >= 1;
+        }
     });
+
+});

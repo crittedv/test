@@ -7,16 +7,16 @@
  */
 
 ig.module(
-        'your.path.here'
-    )
-    .requires(
-    )
-    .defines(function () {
+    'your.path.here'
+)
+.requires(
+)
+.defines(function () {
 
-        MyClass = ig.Class.extend({
+    MyClass = ig.Class.extend({
 
-            init: function () {
-            }
-        });
-
+        init: function () {
+        }
     });
+
+});

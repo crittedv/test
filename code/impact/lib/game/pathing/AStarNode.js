@@ -1,12 +1,12 @@
 
 ig.module(
-    'game.pathing.Node'
+    'game.pathing.AStarNode'
 )
 .requires(
 )
 .defines(function () {
 
-    Node = ig.Class.extend({
+    AStarNode = ig.Class.extend({
         //X-Coordinate within grid
         x : null,
 
@@ -19,9 +19,20 @@ ig.module(
         //Terrain type of the node
         terrain : null,
 
+        //Is this on the closed list for the current/previous run of the
+        //AStarGrid that contains this node
         closed : false,
+
+        //Is this on the open list for the current/previous run of the
+        //AStarGrid that contains this node
         open   : false,
+
+        //The path back to the start given the current start and end of
+        //a given grid
         cameFrom  : null,
+
+        //The distance between this node and an impassable node given
+        //the terrain type of the grid in question
         clearance : 0,
         g  : 0,
         f  : 0,
@@ -31,7 +42,6 @@ ig.module(
             this.y = y;
             this.grid = grid
             this.terrain = terrain;
-            this.id = id(x, y);
         }
     });
 
