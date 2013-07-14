@@ -13,6 +13,7 @@ ig.module(
         maxHealth : 0,
         health    : 0,
         healthMeterUi : null,
+        score: 0,
       //  healthMeterYOffset : -1,
 
         type: ig.Entity.TYPE.NONE,
@@ -43,10 +44,11 @@ ig.module(
 
 
         init: function( x, y, settings ) {
+            this.name = "player";
             this.parent( x,y, settings );
-            this.health    = 10;
+            this.health    = 100;
             this.maxHealth = 100;
-
+            console.log("playername:" + this.name);
             this.addAnim('idle', 1, [0]);
             this.pos.x = x;
             this.pos.y = y;
@@ -55,15 +57,48 @@ ig.module(
 
         update: function() {
 
+            if(this.getHealth() < this.maxHealth)
+            {
+                console.log("I'm hurt!");
+            }
+
             if(this.isDead()) {
                 this.kill();
+                ig.game.gameOver();
             }
 
             this.parent();
+        },
+
+        shrink: function() {
+            console.log("shrunk");
+            this.size.x = this.size.x-6;
+            this.size.y = this.size.y-6;
+        },
+
+        loseLife: function(){
+            console.log("ouch!");
+            this.health--;
+        },
+
+        receivePoints: function(value){
+            this.score+=value;
+            console.log(this.getScore());
+        },
+
+        getScore: function(){
+            console.log("SCORE: " + this.score);
+            return this.score;
         }
-
-
 
     });
 
 });
+
+var PlayerUtil = {
+
+    getPlayer: function(){
+        return ig.game.getEntityByName("player");
+    }
+
+};

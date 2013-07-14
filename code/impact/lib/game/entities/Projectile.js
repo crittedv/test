@@ -9,6 +9,7 @@ ig.module(
         EntityProjectile = ig.Entity.extend({
             name: 'bullet',
             target: null,
+            multitarget: false,
 
             speed: 200,
             damage: 10,
@@ -47,15 +48,12 @@ ig.module(
                 this.maxVel.x = 200;
                 this.maxVel.y = 200;
 
-
-
              //   this.vel.x = (Math.cos(this.angle.toRad()-Math.PI/2) * this.speed);
              //   this.vel.y = (Math.sin(this.angle.toRad()-Math.PI/2) * this.speed);
                 this.vel.x = (Math.cos(this.angle.toRad()-Math.PI/2) * this.maxVel.x);
                 this.vel.y = (Math.sin(this.angle.toRad()-Math.PI/2) * this.maxVel.y);
                 this.addAnim( 'moving', 0.4, [0,1]);
                 this.currentAnim = this.anims.moving;
-
 
                 //this.addAnim( 'moving', 0.2, [0,1] );
                 //rotate the actual angle of the animation sprite
@@ -80,12 +78,9 @@ ig.module(
 
                 if(this.target.isDead() || this.target == undefined || this.target == null || (this.currentFuel.delta() >= this.fuel)){
 
-
                     //THIS NEEDS TO BE KILLED AFTER  TRAVELING X RANGE?
                     this.kill();
                 }
-
-
                 this.parent();
             },
 
@@ -96,7 +91,6 @@ ig.module(
                 if(other instanceof EntityEnemy){
 
                    // console.log("Locked on to Target:" + this.target);
-
                     if(other === this.target){
                         other.receiveDamage(this.damage,this);
                         this.kill();

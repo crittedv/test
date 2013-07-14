@@ -170,6 +170,7 @@ ig.Entity = ig.Class.extend({
 	receiveDamage: function( amount, from ) {
 		this.health -= amount;
 		if( this.health <= 0 ) {
+            PlayerUtil.getPlayer().receivePoints(this.value);
 			this.kill();
 		}
 	},

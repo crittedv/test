@@ -22,6 +22,7 @@ ig.module(
         health    : 0,
         healthMeterUi : null,
         healthMeterYOffset : -1,
+        value: 100,
 
         type: ig.Entity.TYPE.B,
         visitedWaypoints : {},
@@ -48,7 +49,7 @@ ig.module(
         },
 
         visitWaypoint : function(waypoint) {
-            console.log("VISITING" + waypoint.name);
+            //console.log("VISITING" + waypoint.name);
             if(!TypeUtil.hasProp(this.visitedWaypoints, waypoint.name)) {
                 this.setWaypoint(waypoint.next);
                 this.bounceSign *= -1;
@@ -58,6 +59,7 @@ ig.module(
         },
 
         visitExit : function(exit) {
+
             this.kill();
         },
 

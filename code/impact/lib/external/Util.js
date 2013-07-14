@@ -12,7 +12,7 @@ var Sk = {
 var StringUtil = {
     paren : function(str) {
         return "( " + str + " )";
-    }
+}
 }
 
 var TypeUtil = {
@@ -116,7 +116,7 @@ var CombatUtil = {
         var closestEntity = null;
 
         arrTestEntities = ig.game.getEntitiesByType(type);
-        console.log("total: " + arrTestEntities.length);
+        //console.log("total: " + arrTestEntities.length);
         if(arrTestEntities.length != 0){
             for(var i=0;i<arrTestEntities.length;i++){
                 var testObject = arrTestEntities[i];
@@ -134,10 +134,30 @@ var CombatUtil = {
             }
         }
         return closestEntity;
+    },
+
+    /**
+     * Utility to clean up single target projectiles when their target has exited.
+     * Can be used to reassign targets as well (eventually).
+     *
+     * @param myObject
+     */
+    handleProjectilesOnExit: function(myObject){
+
+        var arrTestBullets = [];
+
+        arrTestBullets = ig.game.getEntitiesByType(EntityProjectile);
+        if(arrTestBullets.length != 0){
+            for(var i=0;i<arrTestBullets.length;i++){
+                var testBullet = arrTestBullets[i];
+                if(testBullet.target === myObject && !testBullet.multitarget){
+                    testBullet.kill();
+                }
+            }
+        }
+
     }
-
-
-
-
 };
+
+
 

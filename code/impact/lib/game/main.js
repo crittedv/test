@@ -36,6 +36,7 @@ MyGame = ig.Game.extend({
         ig.input.bind( ig.KEY.MOUSE2, 'rightButton' );
 
         this.loadLevel( LevelTest );
+       // this.player = ig.game.getEntityByName("player");
 	},
 	
 	update: function() {
@@ -44,6 +45,7 @@ MyGame = ig.Game.extend({
         this.towerPlacement.show();
         this.towerPlacement.update();
 		this.parent();
+      //  console.log(PlayerUtil.getScore());
 		
 		// Add your own, additional update code here
 	},
@@ -52,6 +54,9 @@ MyGame = ig.Game.extend({
 		// Draw all entities and backgroundMaps
 		this.parent();
         this.drawCursorLoc();
+        this.font.draw('Score: ' + PlayerUtil.getPlayer().getScore(), 5, 5, ig.Font.ALIGN.LEFT);
+   //     this.font.draw( 'Score ' + (PlayerUtil.getScore()), this.drawCoordinates.score.x, this.drawCoordinates.score.y, ig.Font.ALIGN.CENTER );
+   //     this.font.draw( 'Lives: ' + (this.playerController.lives-1), this.drawCoordinates.lives.x, this.drawCoordinates.lives.y, ig.Font.ALIGN.CENTER );
 
 	},
 

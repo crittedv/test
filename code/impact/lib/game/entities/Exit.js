@@ -18,8 +18,14 @@ ig.module(
             console.log("EXIT");
             if(TypeUtil.hasProp(other,"visitExit")) {
                 other.visitExit(this);
+                CombatUtil.handleProjectilesOnExit(other);
+                var player = PlayerUtil.getPlayer();
+                console.log("pname: " + player.name);
+                player.loseLife();
+                player.shrink();
             }
-            EntityPlayer = ig.game.getEntityByType(EntityPlayer);
+
+         //   banana.shrink();
         }
     });
 });
