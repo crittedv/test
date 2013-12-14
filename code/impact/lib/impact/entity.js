@@ -171,6 +171,7 @@ ig.Entity = ig.Class.extend({
 		this.health -= amount;
 		if( this.health <= 0 ) {
             PlayerUtil.getPlayer().receivePoints(this.value);
+            PlayerUtil.getPlayer().receiveMoney(this.gold);
 			this.kill();
 		}
 	},

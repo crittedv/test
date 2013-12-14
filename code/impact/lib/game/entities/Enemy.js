@@ -23,6 +23,7 @@ ig.module(
         healthMeterUi : null,
         healthMeterYOffset : -1,
         value: 100,
+        gold: 10,
 
         type: ig.Entity.TYPE.B,
         visitedWaypoints : {},

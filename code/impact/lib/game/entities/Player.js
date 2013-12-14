@@ -14,6 +14,7 @@ ig.module(
         health    : 0,
         healthMeterUi : null,
         score: 0,
+        wallet: 100,
       //  healthMeterYOffset : -1,
 
         type: ig.Entity.TYPE.NONE,
@@ -77,18 +78,32 @@ ig.module(
         },
 
         loseLife: function(){
-            console.log("ouch!");
+         //   console.log("ouch!");
             this.health--;
         },
 
         receivePoints: function(value){
             this.score+=value;
-            console.log(this.getScore());
+          //  console.log(this.getScore());
+        },
+
+        receiveMoney: function(value){
+            this.wallet+=value;
+           // console.log("wallet: " + this.wallet);
+        },
+
+        spendMoney: function(value){
+            this.wallet-=value;
         },
 
         getScore: function(){
             console.log("SCORE: " + this.score);
             return this.score;
+        },
+
+        getWallet: function(){
+            console.log("WALLET: " + this.wallet);
+            return this.wallet;
         }
 
     });

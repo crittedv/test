@@ -30,6 +30,7 @@ ig.module(
         rateOfFire:.2,
         fireTimer: null,
         damage: 10,
+        cost: 100,
 
         // flag for if the user has this tower selected
         isSelected: false,

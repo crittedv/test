@@ -25,8 +25,10 @@ ig.module(
         update : function() {
 
             if(ig.input.pressed("leftButton")){
-                if(!this.isBlocked()){
-                    ig.game.spawnEntity( EntityTower,this.pos.x, this.pos.y );
+                if(!this.isBlocked() && !this.isPlayerPoor()){
+
+                    myTower = ig.game.spawnEntity( EntityTower,this.pos.x, this.pos.y );
+                    PlayerUtil.getPlayer().spendMoney(myTower.cost);
                 }
             }
 
@@ -38,9 +40,17 @@ ig.module(
 
             if( this.visible && this.collisionInfo != 0) {
                 var context = ig.system.context;
-                if(this.isBlocked()) {
+
+                if(this.isBlocked() && this.isPlayerPoor()){
+                    context.fillStyle = "orange";
+                }
+                else if(this.isBlocked()) {
                     context.fillStyle = "yellow";
-                } else {
+                }
+                else if(this.isPlayerPoor()){
+                    context.fillStyle = "red";
+                }
+                else {
                     context.fillStyle = "blue";
                 }
 
@@ -62,6 +72,24 @@ ig.module(
             var closestEnemy = CombatUtil.getClosestEntity(EntityEnemy, this);
             var closestTower = CombatUtil.getClosestEntity(EntityTower, this);
             return((this.touches(closestEnemy) || this.touches(closestTower) || !this.collisionInfo.clear || this.collisionInfo.off));
+        },
+
+        /**
+         * Tests to see if player has the money to foot the bill for the selected tower
+         * @returns {boolean}
+         */
+        isPlayerPoor : function(){
+            console.log("wallet: " + PlayerUtil.getPlayer().getWallet());
+            console.log("tower cost: " + EntityTower.cost);
+            if(PlayerUtil.getPlayer().getWallet() <= EntityTower.cost){
+                console.log("I'M BROKE");
+
+                return true;
+            }
+            else{
+                console.log("I'M RICH BITCH!!!");
+                return false;
+            }
         }
     });
 
